@@ -121,6 +121,7 @@ const cocoDataAccess: DataAccessType = async (args: ArgsType): Promise<CocoDatas
   } = args;
 
   const labelMap = await getLabelMap(dataDir);
+  const labelArray = Object.keys(labelMap).sort((k1, k2) => labelMap[k1] - labelMap[k2]);
 
   const trainPair = await getValidPair(path.join(dataDir, 'train'), labelMap);
   const validationPair = await getValidPair(path.join(dataDir, 'validation'), labelMap);
@@ -135,7 +136,8 @@ const cocoDataAccess: DataAccessType = async (args: ArgsType): Promise<CocoDatas
   const result: CocoDataset = {
     metadata: {
       labelMap,
-      isBitMask
+      isBitMask,
+      labelArray
     },
     dataStatistics: [],
     validationResult: {
