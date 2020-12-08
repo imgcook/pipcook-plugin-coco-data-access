@@ -226,7 +226,7 @@ const cocoDataAccess: DataAccessType = async (args: ArgsType): Promise<CocoDatas
   if (testPair.length > 0) {
     result.testLoader = testLoader;
   }
-  
+
   return result;
 };
 
