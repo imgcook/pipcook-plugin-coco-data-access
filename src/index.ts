@@ -111,6 +111,9 @@ const getValidPair = async (dataPath: string, labelMap: Record<string, number>) 
     if (fs.existsSync(path.join(dataPath, imageName))) {
       cocoJson.images.push(imageItem);
       imageData.annotation.object.forEach((object: any) => {
+        if (typeof labelMap[object.name[0]] === 'undefined') {
+          throw new TypeError(`category: ${object.name[0]} is not match with train/*.xml (from ${fileName})`);
+        }
         const label: ImageLabel = {
           name: object.name[0],
           categoryId: labelMap[object.name[0]]
